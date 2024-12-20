@@ -76,10 +76,24 @@
             <div>
                 <label for="id_number_of_tickets">Number of Tickets</label>
                 {{ form.number_of_tickets }}
+                {% if form.number_of_tickets.errors %}
+                        <ul>
+                            {% for error in form.number_of_tickets.errors %}
+                            <li> {{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
             </div>
             <div>
                 <label for="id_coupon_code">Coupon Code (Optional)</label>
                 {{ form.coupon_code }}
+                {% if form.coupon_code.errors %}
+                        <ul>
+                            {% for error in form.coupon_code.errors %}
+                            <li style="color: red;"> {{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
             </div>
             <button type="submit">Book Now</button>
         </form>
