@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+        .details {
+            margin-top: 20px;
+        }
+        .details p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .details strong {
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Booking Successful</h1>
+    </header>
+    <div class="container">
+        <p>Your booking has been confirmed!</p>
+        <div class="details">
+            <p><strong>Event:</strong> {{ booking.event_name.name }}</p>
+            <p><strong>Number of Tickets:</strong> {{ booking.number_of_tickets }}</p>
+            <p><strong>Price per Ticket:</strong> ${{ booking.price_per_ticket }}</p>
+            <p><strong>Total Price:</strong> ${{ booking.total_price }}</p>
+            {% if applied_coupon %}
+                <p><strong>Coupon Applied:</strong> {{ applied_coupon.code }} ({{ applied_coupon.discount_percentage }}% off)</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

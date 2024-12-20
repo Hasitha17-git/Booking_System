@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Event</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .event-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .event-list li {
+            margin: 5px 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Book Event</h1>
+    </header>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="id_event">Select Event</label>
+                {{ form.event }}
+            </div>
+            <div>
+                <label for="id_number_of_tickets">Number of Tickets</label>
+                {{ form.number_of_tickets }}
+            </div>
+            <div>
+                <label for="id_coupon_code">Coupon Code (Optional)</label>
+                {{ form.coupon_code }}
+            </div>
+            <button type="submit">Book Now</button>
+        </form>
+ 
+        {% if total_price is not None %}
+            <div>
+                <h2>Total Price: ${{ total_price }}</h2>
+            </div>
+        {% endif %}
+ 
+        <div>
+            <h3>Available Events</h3>
+            <ul class="event-list">
+                {% for event in form.fields.event.queryset %}
+                    <li>{{ event.name }} - ${{ event.price_per_ticket }} per ticket</li>
+                {% endfor %}
+            </ul>
+ 
+            
+        </div>
+    </div>
+</body>
+</html>
+ 
